@@ -1,7 +1,8 @@
 {
-    "functions": {
-      "api/*": {
-        "includeFiles": "prisma/**"
-      }
+  "functions": {
+    "api/**/*.js": {
+      "maxDuration": 10,
+      "includeFiles": "prisma/**"
     }
   }
+}
