@@ -3,9 +3,6 @@ import { prisma } from '@/lib/prisma';
 import { v2 as cloudinary } from 'cloudinary';
 
 
-// Dynamic import for cloudinary to avoid build issues
-// const cloudinary = require('cloudinary').v2;
-
 // Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

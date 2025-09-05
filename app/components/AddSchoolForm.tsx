@@ -63,19 +63,19 @@ export default function AddSchoolForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-4 sm:py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white shadow-xl rounded-lg overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-8">
-            <h1 className="text-3xl font-bold text-white text-center">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-4 sm:px-6 py-6 sm:py-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white text-center">
               Add New School
             </h1>
-            <p className="text-blue-100 text-center mt-2">
+            <p className="text-blue-100 text-center mt-2 text-sm sm:text-base">
               Enter school information to add to the database
             </p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="p-4 sm:p-6 space-y-4 sm:space-y-6">
             {message && (
               <div
                 className={`p-4 rounded-lg ${
@@ -88,7 +88,7 @@ export default function AddSchoolForm() {
               </div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {/* School Name */}
               <div className="md:col-span-2">
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -98,7 +98,7 @@ export default function AddSchoolForm() {
                   {...register('name', { required: 'School name is required' })}
                   type="text"
                   id="name"
-                  className="w-full px-4 py-3 border border-gray-300 text-black text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
                   placeholder="Enter school name"
                 />
                 {errors.name && (
@@ -115,7 +115,7 @@ export default function AddSchoolForm() {
                   {...register('address', { required: 'Address is required' })}
                   id="address"
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 resize-none"
                   placeholder="Enter complete address"
                 />
                 {errors.address && (
@@ -132,7 +132,7 @@ export default function AddSchoolForm() {
                   {...register('city', { required: 'City is required' })}
                   type="text"
                   id="city"
-                  className="w-full px-4 py-3 border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
                   placeholder="Enter city"
                 />
                 {errors.city && (
@@ -149,7 +149,7 @@ export default function AddSchoolForm() {
                   {...register('state', { required: 'State is required' })}
                   type="text"
                   id="state"
-                  className="w-full px-4 py-3 border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
                   placeholder="Enter state"
                 />
                 {errors.state && (
@@ -172,7 +172,7 @@ export default function AddSchoolForm() {
                   })}
                   type="tel"
                   id="contact"
-                  className="w-full px-4 py-3 border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
                   placeholder="Enter contact number"
                 />
                 {errors.contact && (
@@ -195,7 +195,7 @@ export default function AddSchoolForm() {
                   })}
                   type="email"
                   id="email"
-                  className="w-full px-4 py-3 border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
                   placeholder="Enter email address"
                 />
                 {errors.email && (
@@ -208,7 +208,7 @@ export default function AddSchoolForm() {
                 <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
                   School Image
                 </label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition duration-200">
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 sm:p-6 text-center hover:border-blue-400 transition duration-200">
                   <input
                     {...register('image')}
                     type="file"
@@ -240,11 +240,11 @@ export default function AddSchoolForm() {
             </div>
 
             {/* Submit Button */}
-            <div className="flex justify-end">
+            <div className="flex justify-center sm:justify-end pt-2">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 sm:px-8 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Adding School...' : 'Add School'}
               </button>
