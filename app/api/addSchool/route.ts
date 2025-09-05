@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
+import { v2 as cloudinary } from 'cloudinary';
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,23 +38,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let imagePath = '';
+    let imageUrl = '';
     
-    if (imageFile) {
-      // Create schools directory if it doesn't exist
-      const schoolsDir = join(process.cwd(), 'public', 'schools');
-      await mkdir(schoolsDir, { recursive: true });
+    if (imageFile && imageFile.size > 0) {
+      try {
+        // Convert file to base64
+        const bytes = await imageFile.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        const base64 = buffer.toString('base64');
+        const dataURI = `data:${imageFile.type};base64,${base64}`;
 
-      // Generate unique filename
-      const timestamp = Date.now();
-      const fileExtension = imageFile.name.split('.').pop();
-      const fileName = `school_${timestamp}.${fileExtension}`;
-      imagePath = `/schools/${fileName}`;
+        // Upload to Cloudinary
+        const uploadResponse = await cloudinary.uploader.upload(dataURI, {
+          folder: 'school-images',
+          public_id: `school_${Date.now()}`,
+          resource_type: 'auto',
+        });
 
-      // Save file
-      const bytes = await imageFile.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-      await writeFile(join(schoolsDir, fileName), buffer);
+        imageUrl = uploadResponse.secure_url;
+      } catch (uploadError) {
+        console.error('Error uploading to Cloudinary:', uploadError);
+        return NextResponse.json(
+          { error: 'Failed to upload image' },
+          { status: 500 }
+        );
+      }
     }
 
     // Save to database
@@ -60,7 +74,7 @@ export async function POST(request: NextRequest) {
         state,
         contact,
         email,
-        image: imagePath,
+        image: imageUrl,
       },
     });
 
